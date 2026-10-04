@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MissionLMS - Connexion</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="login-page">
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-header">
+
+                <h1>MissionLMS</h1>
+
+                <p>
+                    Plateforme d'apprentissage par missions
+                </p>
+
+            </div>
+
+            <div class="login-content">
+
+                <h2>Bienvenue</h2>
+
+                <p class="login-subtitle">
+                    Connectez-vous pour continuer votre parcours d'apprentissage.
+                </p>
+
+                <form id="login-form">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Courriel
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Entrez votre courriel"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Mot de passe
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Entrez votre mot de passe"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Se connecter
+                    </button>
+
+                </form>
+
+                <p
+                    id="login-error"
+                    class="login-error"
+                ></p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

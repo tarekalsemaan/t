@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MissionLMS</title>
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header>
+
+    <div class="brand-block">
+        <h1>MissionLMS</h1>
+        <span class="brand-subtitle">
+            Apprendre par missions
+        </span>
+    </div>
+
+    <div
+        class="region-mark"
+        aria-label="Québec"
+    >
+        ⚜ Québec
+    </div>
+
+    <button
+        type="button"
+        class="Déconnexion-button"
+        onclick="Déconnexion()"
+    >
+        Déconnexion
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <!-- =====================================================
+         STUDENT INFORMATION
+         ===================================================== -->
+
+    <div
+        id="student-card"
+        class="student-card"
+    >
+
+        <h2 id="student-name">
+            Chargement de l’étudiant…
+        </h2>
+
+        <p id="student-email"></p>
+
+    </div>
+
+
+    <!-- =====================================================
+         MISSIONS SCREEN
+         ===================================================== -->
+
+    <div id="missions-screen">
+
+        <h2>Mes missions</h2>
+
+        <div id="missions">
+            Chargement des missions…
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MISSION SCREEN
+         ===================================================== -->
+
+    <div
+        id="mission-screen"
+        style="display: none;"
+    >
+
+        <button
+            class="back-button"
+            onclick="showMissions()"
+        >
+            ← Retour aux missions
+        </button>
+
+
+        <h2 id="mission-title">
+            Mission
+        </h2>
+
+
+        <div id="mission-status"></div>
+
+
+        <!-- =================================================
+             LESSONS
+             ================================================= -->
+
+        <h3>Leçons</h3>
+
+        <div id="lessons">
+            Chargement des leçons…
+        </div>
+
+
+        <!-- =================================================
+             ASSIGNMENTS
+             ================================================= -->
+
+        <h3>Travail</h3>
+
+        <div id="assignments">
+            Chargement du travail…
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/auth.js"></script>
+
+<!-- Cache-busting: force the browser to load the current app.js -->
+<script src="js/app.js?v=2"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MissionLMS Administration</title>
+
+    <link
+        rel="stylesheet"
+        href="admin/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>MissionLMS</h2>
+            <span>Administration</span>
+            <div class="region-mark sidebar-region">⚜ Québec</div>
+        </div>
+
+        <nav>
+
+            <button
+                class="nav-button active"
+                data-section="dashboard"
+            >
+                Tableau de bord
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="students"
+            >
+                Étudiants
+            </button>
+
+            <button
+                class="nav-button"
+                data-section="courses"
+            >
+                Cours
+            </button>
+
+            <button
+                class="nav-button"
+                data-section="missions"
+            >
+                Missions
+            </button>
+
+            <button
+                class="nav-button"
+                data-section="lessons"
+            >
+                Leçons
+            </button>
+
+            <button
+                class="nav-button"
+                data-section="assignments"
+            >
+                Travaux
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Tableau de bord administrateur</h1>
+
+                <p>
+                    Gérez le contenu pédagogique de MissionLMS.
+                </p>
+
+            </div>
+
+            <div class="region-mark top-region">⚜ Québec</div>
+
+            <button class="student-link" type="button" onclick="adminDéconnexion()">Déconnexion</button>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            id="dashboard-section"
+            class="admin-section active-section"
+        >
+
+            <h2>Vue d’ensemble</h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>Cours</span>
+                    <strong id="course-count">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Missions</span>
+                    <strong id="mission-count">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Leçons</span>
+                    <strong id="lesson-count">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Travaux</span>
+                    <strong id="assignment-count">-</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COURSES
+             ================================================= -->
+
+
+        <section id="students-section" class="admin-section">
+            <div class="section-header">
+                <div><h2>Étudiants</h2><p>Créez des comptes étudiants et inscrivez-les à un cours.</p></div>
+                <button id="add-student-button" class="primary-button">+ Ajouter un étudiant</button>
+            </div>
+            <div id="students-list"></div>
+        </section>
+
+        <section
+            id="courses-section"
+            class="admin-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Cours</h2>
+                    <p>Gérez vos cours.</p>
+                </div>
+
+                <button
+                    id="add-course-button"
+                    class="primary-button"
+                >
+                    + Ajouter un cours
+                </button>
+
+            </div>
+
+            <div id="courses-list"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             MISSIONS
+             ================================================= -->
+
+        <section
+            id="missions-section"
+            class="admin-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Missions</h2>
+                    <p>Gérez les missions des cours.</p>
+                </div>
+
+                <button
+                    id="add-mission-button"
+                    class="primary-button"
+                >
+                    + Ajouter une mission
+                </button>
+
+            </div>
+
+            <div id="missions-list"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             LESSONS
+             ================================================= -->
+
+        <section
+            id="lessons-section"
+            class="admin-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Leçons</h2>
+
+                    <p>
+                        Créez, modifiez et supprimez les leçons des missions.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-lesson-button"
+                    class="primary-button"
+                >
+                    + Ajouter une leçon
+                </button>
+
+            </div>
+
+            <div id="lessons-list"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             ASSIGNMENTS
+             ================================================= -->
+
+        <section
+            id="assignments-section"
+            class="admin-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Travaux</h2>
+
+                    <p>
+                        Créez, modifiez et supprimez les travaux.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-assignment-button"
+                    class="primary-button"
+                >
+                    + Ajouter un travail
+                </button>
+
+            </div>
+
+            <div id="assignments-list"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MODAL
+         ===================================================== -->
+
+    <div
+        id="modal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 id="modal-title">
+                    Edit
+                </h2>
+
+                <button
+                    id="close-modal"
+                    class="close-button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div id="modal-body"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="admin/config.js"></script>
+
+    <script src="admin/modal.js"></script>
+
+    <script src="admin/navigation.js"></script>
+
+    <script src="admin/students.js"></script>
+
+    <script src="admin/courses.js"></script>
+
+    <script src="admin/missions.js"></script>
+
+    <script src="admin/lessons.js"></script>
+
+    <script src="admin/assignments.js"></script>
+
+    <script src="admin/admin.js"></script>
+
+
+</body>
+
+</html>

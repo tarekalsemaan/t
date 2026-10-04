@@ -1,0 +1,13 @@
+services:
+  missionlms:
+    build: .
+    container_name: missionlms
+    ports:
+      - "8000:8000"
+    environment:
+      MissionLMS_SECRET_KEY: "change-this-before-classroom-use"
+      ACCESS_TOKEN_EXPIRE_MINUTES: "480"
+      DATABASE_URL: "sqlite:////data/missionlms.db"
+    volumes:
+      - ./missionlms.db:/data/missionlms.db
+    restart: unless-stopped

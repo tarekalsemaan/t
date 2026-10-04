@@ -1,0 +1,624 @@
+:root {
+    --primary: #1f5fbf;
+    --primary-dark: #174a95;
+    --primary-soft: #eaf2ff;
+
+    --success: #16803c;
+    --success-soft: #eaf8ef;
+
+    --warning: #a16207;
+    --warning-soft: #fff7df;
+
+    --danger: #b42318;
+    --danger-soft: #fff0ef;
+
+    --text: #172033;
+    --muted: #64748b;
+    --border: #dce3ec;
+    --surface: #fff;
+    --background: #f4f7fb;
+
+    --shadow: 0 8px 25px rgba(15, 35, 65, .08);
+    --radius: 14px;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    min-height: 72px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 14px 32px;
+
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.brand-block {
+    min-width: 190px;
+}
+
+.brand-block h1 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 24px;
+    letter-spacing: -.4px;
+}
+
+.brand-subtitle {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.region-mark {
+    color: #1f2937;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: .2px;
+}
+
+header .region-mark {
+    margin-left: auto;
+}
+
+.logout-button {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: #334155;
+
+    padding: 9px 15px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-button:hover {
+    background: #f8fafc;
+    border-color: #b9c4d2;
+}
+
+
+/* =========================================================
+   GENERAL CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(100% - 32px, 980px);
+    margin: 34px auto 60px;
+}
+
+
+/* =========================================================
+   STUDENT
+   ========================================================= */
+
+.student-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 25px 28px;
+    margin-bottom: 28px;
+
+    box-shadow: var(--shadow);
+}
+
+.student-card h2 {
+    margin: 0 0 6px;
+    font-size: 25px;
+}
+
+.student-card p {
+    margin: 0;
+    color: var(--muted);
+}
+
+#missions-screen > h2 {
+    margin: 0 0 18px;
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   MISSIONS
+   ========================================================= */
+
+.mission {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 5px solid #cbd5e1;
+    border-radius: var(--radius);
+
+    padding: 23px 24px;
+    margin-bottom: 15px;
+
+    box-shadow: 0 3px 12px rgba(15, 35, 65, .05);
+
+    transition: .15s;
+}
+
+.mission.unlocked {
+    border-left-color: var(--success);
+}
+
+.mission.unlocked:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+.mission.locked {
+    opacity: .65;
+    background: #f9fafb;
+}
+
+.mission h3 {
+    margin: 0 0 15px;
+    font-size: 19px;
+}
+
+.mission p {
+    margin: 8px 0;
+    color: #475569;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+
+    margin: 13px 0 3px;
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status.unlocked {
+    background: var(--success-soft);
+    color: var(--success);
+}
+
+.status.locked {
+    background: #eef1f5;
+    color: #64748b;
+}
+
+.status.completed {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.mission-button,
+.back-button,
+.submit-button {
+    border: 0;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.mission-button {
+    padding: 10px 17px;
+    margin-top: 12px;
+}
+
+.open-button {
+    background: var(--primary);
+    color: #fff;
+}
+
+.open-button:hover {
+    background: var(--primary-dark);
+}
+
+.locked-button {
+    background: #e2e8f0;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.back-button {
+    background: #334155;
+    color: #fff;
+
+    padding: 10px 17px;
+    margin-bottom: 22px;
+}
+
+.back-button:hover {
+    background: #1e293b;
+}
+
+.submit-button {
+    background: var(--success);
+    color: #fff;
+
+    padding: 12px 20px;
+    margin-top: 12px;
+}
+
+.submit-button:hover {
+    background: #116530;
+}
+
+.submit-button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MISSION DETAILS
+   ========================================================= */
+
+#mission-title {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+#mission-screen > h3 {
+    margin: 30px 0 14px;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   LESSONS / ASSIGNMENTS
+   ========================================================= */
+
+.lesson,
+.assignment {
+    background: #fff;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 25px;
+    margin-bottom: 18px;
+
+    box-shadow: 0 3px 12px rgba(15, 35, 65, .05);
+}
+
+.lesson {
+    border-left: 4px solid var(--primary);
+}
+
+.assignment {
+    border-left: 4px solid #7c3aed;
+}
+
+.lesson h3,
+.assignment h3 {
+    margin: 0 0 14px;
+    font-size: 19px;
+}
+
+.lesson-content,
+.assignment-instructions {
+    line-height: 1.75;
+    color: #334155;
+    white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   ASSIGNMENT ANSWER
+   ========================================================= */
+
+.answer-label {
+    display: block;
+
+    margin-top: 22px;
+    margin-bottom: 8px;
+
+    font-weight: 700;
+    color: #334155;
+}
+
+.answer-box {
+    width: 100%;
+    min-height: 220px;
+
+    padding: 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #fbfcfe;
+    color: #172033;
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.55;
+
+    resize: vertical;
+}
+
+.answer-box:focus {
+    outline: none;
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(31, 95, 191, .12);
+}
+
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+.submission-result {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.success {
+    background: var(--success-soft);
+    color: #166534;
+    border: 1px solid #b7e4c7;
+}
+
+.warning {
+    background: var(--warning-soft);
+    color: #854d0e;
+    border: 1px solid #f1d58a;
+}
+
+.error {
+    background: var(--danger-soft);
+    color: #991b1b;
+
+    padding: 15px;
+    border-radius: 9px;
+
+    border: 1px solid #f4c7c3;
+}
+
+.loading,
+.no-data {
+    color: var(--muted);
+}
+
+.no-data {
+    padding: 12px 0;
+}
+
+.score {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #eef4ff 0%,
+        #f7f9fc 55%,
+        #eef6f1 100%
+    );
+}
+
+.login-container {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow:
+        0 18px 45px rgba(15, 35, 65, .12);
+}
+
+.login-header {
+    padding: 31px 30px 27px;
+
+    background: var(--primary);
+    color: #fff;
+
+    text-align: center;
+}
+
+.login-header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.login-header p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    opacity: .92;
+}
+
+.login-content {
+    padding: 31px;
+}
+
+.login-content h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.login-subtitle {
+    color: var(--muted);
+
+    margin: 8px 0 25px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOGIN FORM
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #334155;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #fff;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(31, 95, 191, .12);
+}
+
+.login-button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: var(--primary);
+    color: #fff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: var(--primary-dark);
+}
+
+.login-error:empty {
+    display: none;
+}
+
+.login-error {
+    margin: 16px 0 0;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    background: var(--danger-soft);
+    color: var(--danger);
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 13px 17px;
+    }
+
+    header .region-mark {
+        display: none;
+    }
+
+    .container {
+        width: min(100% - 22px, 980px);
+        margin-top: 22px;
+    }
+
+    .student-card,
+    .lesson,
+    .assignment {
+        padding: 20px;
+    }
+}
