@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -23,6 +25,32 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# =========================================================
+# MEDIA RESPONSE
+# =========================================================
+
+def get_lesson_media(lesson):
+    return [
+        {
+            "id": link.media.id,
+            "title": link.media.title,
+            "filename": link.media.filename,
+            "media_type": link.media.media_type,
+            "mime_type": link.media.mime_type,
+            "url": (
+                f"/media/"
+                f"{Path(link.media.file_path).name}"
+            ),
+            "display_order": link.display_order
+        }
+        for link in sorted(
+            lesson.media_links,
+            key=lambda item: item.display_order
+        )
+        if link.media.active
+    ]
 
 
 # =========================================================
@@ -64,7 +92,8 @@ def create_lesson(
         "title": new_lesson.title,
         "content": new_lesson.content,
         "lesson_number": new_lesson.lesson_number,
-        "mission_id": new_lesson.mission_id
+        "mission_id": new_lesson.mission_id,
+        "media": []
     }
 
 
@@ -95,7 +124,8 @@ def get_lessons(
                 "title": lesson.title,
                 "content": lesson.content,
                 "lesson_number": lesson.lesson_number,
-                "mission_id": lesson.mission_id
+                "mission_id": lesson.mission_id,
+                "media": get_lesson_media(lesson)
             }
             for lesson in lessons
         ]
@@ -131,7 +161,8 @@ def get_mission_lessons(
                 "id": lesson.id,
                 "lesson_number": lesson.lesson_number,
                 "title": lesson.title,
-                "content": lesson.content
+                "content": lesson.content,
+                "media": get_lesson_media(lesson)
             }
             for lesson in lessons
         ]
@@ -150,9 +181,16 @@ def get_student_mission_lessons(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
-    if current_user.get("role") != "STUDENT" or int(current_user.get("student_id", -1)) != student_id:
+    if (
+        current_user.get("role") != "STUDENT"
+        or int(current_user.get("student_id", -1)) != student_id
+    ):
         from fastapi import HTTPException, status
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You can only access your own lessons")
+
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You can only access your own lessons"
+        )
 
     # Check student's mission progress
     progress = (
@@ -191,7 +229,8 @@ def get_student_mission_lessons(
                 "id": lesson.id,
                 "lesson_number": lesson.lesson_number,
                 "title": lesson.title,
-                "content": lesson.content
+                "content": lesson.content,
+                "media": get_lesson_media(lesson)
             }
             for lesson in lessons
         ]
@@ -248,7 +287,8 @@ def update_lesson(
         "title": existing_lesson.title,
         "content": existing_lesson.content,
         "lesson_number": existing_lesson.lesson_number,
-        "mission_id": existing_lesson.mission_id
+        "mission_id": existing_lesson.mission_id,
+        "media": get_lesson_media(existing_lesson)
     }
 
 

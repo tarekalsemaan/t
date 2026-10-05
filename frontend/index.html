@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -12,138 +11,156 @@
 
     <title>MissionLMS</title>
 
-    <!-- CSS -->
     <link
         rel="stylesheet"
-        href="css/style.css"
+        href="css/style.css?v=3"
     >
-
 </head>
-
 
 <body>
 
-<header>
-
-    <div class="brand-block">
-        <h1>MissionLMS</h1>
-        <span class="brand-subtitle">
-            Apprendre par missions
-        </span>
-    </div>
-
-    <div
-        class="region-mark"
-        aria-label="Québec"
-    >
-        ⚜ Québec
-    </div>
-
-    <button
-        type="button"
-        class="Déconnexion-button"
-        onclick="Déconnexion()"
-    >
-        Déconnexion
-    </button>
-
-</header>
-
-
-<div class="container">
-
     <!-- =====================================================
-         STUDENT INFORMATION
+         HEADER
          ===================================================== -->
 
-    <div
-        id="student-card"
-        class="student-card"
-    >
+    <header>
 
-        <h2 id="student-name">
-            Chargement de l’étudiant…
-        </h2>
-
-        <p id="student-email"></p>
-
-    </div>
-
-
-    <!-- =====================================================
-         MISSIONS SCREEN
-         ===================================================== -->
-
-    <div id="missions-screen">
-
-        <h2>Mes missions</h2>
-
-        <div id="missions">
-            Chargement des missions…
+        <div>
+            <h1>MissionLMS</h1>
+            <p>Formation par missions</p>
         </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         MISSION SCREEN
-         ===================================================== -->
-
-    <div
-        id="mission-screen"
-        style="display: none;"
-    >
 
         <button
-            class="back-button"
-            onclick="showMissions()"
+            type="button"
+            class="logout-button"
+            onclick="Déconnexion()"
         >
-            ← Retour aux missions
+            Déconnexion
         </button>
 
-
-        <h2 id="mission-title">
-            Mission
-        </h2>
+    </header>
 
 
-        <div id="mission-status"></div>
+    <main class="container">
+
+        <!-- =================================================
+             STUDENT
+             ================================================= -->
+
+        <section class="student-card">
+
+            <div>
+                <h2 id="student-name">
+                    Chargement...
+                </h2>
+
+                <p id="student-email"></p>
+            </div>
+
+        </section>
 
 
         <!-- =================================================
-             LESSONS
+             MISSIONS SCREEN
              ================================================= -->
 
-        <h3>Leçons</h3>
+        <div id="missions-screen">
 
-        <div id="lessons">
-            Chargement des leçons…
+            <section>
+
+                <h2>Mes missions</h2>
+
+                <div id="missions">
+                    <p class="loading">
+                        Chargement des missions…
+                    </p>
+                </div>
+
+            </section>
+
         </div>
 
 
         <!-- =================================================
-             ASSIGNMENTS
+             MISSION SCREEN
              ================================================= -->
 
-        <h3>Travail</h3>
+        <div
+            id="mission-screen"
+            style="display: none;"
+        >
 
-        <div id="assignments">
-            Chargement du travail…
+            <button
+                type="button"
+                class="back-button"
+                onclick="showMissions()"
+            >
+                ← Retour aux missions
+            </button>
+
+
+            <section class="mission-header">
+
+                <h2 id="mission-title">
+                    Mission
+                </h2>
+
+                <div id="mission-status"></div>
+
+            </section>
+
+
+            <!-- =============================================
+                 LESSONS
+                 ============================================= -->
+
+            <section class="content-section">
+
+                <h2>Contenu pédagogique</h2>
+
+                <div id="lessons">
+
+                    <p class="loading">
+                        Chargement des leçons…
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 ASSIGNMENTS
+                 ============================================= -->
+
+            <section class="content-section">
+
+                <h2>Travail à remettre</h2>
+
+                <div id="assignments">
+
+                    <p class="loading">
+                        Chargement du travail…
+                    </p>
+
+                </div>
+
+            </section>
+
         </div>
 
-    </div>
-
-</div>
+    </main>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
-<script src="js/auth.js"></script>
+    <script src="js/auth.js"></script>
 
-<!-- Cache-busting: force the browser to load the current app.js -->
-<script src="js/app.js?v=2"></script>
+    <script src="js/markdown.js?v=1"></script>
+
+    <script src="js/app.js?v=3"></script>
 
 </body>
 

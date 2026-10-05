@@ -2,14 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install CA certificates
+# Install standard CA certificates
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
+    && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
-
-# Add the corporate Zscaler root certificate
-COPY zscaler-root-ca.crt /usr/local/share/ca-certificates/zscaler-root-ca.crt
-RUN update-ca-certificates
 
 # Install Python dependencies
 COPY requirements.txt .

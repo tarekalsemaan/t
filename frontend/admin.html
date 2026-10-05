@@ -51,12 +51,14 @@
                 Étudiants
             </button>
 
+
             <button
                 class="nav-button"
                 data-section="courses"
             >
                 Cours
             </button>
+
 
             <button
                 class="nav-button"
@@ -65,6 +67,7 @@
                 Missions
             </button>
 
+
             <button
                 class="nav-button"
                 data-section="lessons"
@@ -72,11 +75,20 @@
                 Leçons
             </button>
 
+
             <button
                 class="nav-button"
                 data-section="assignments"
             >
                 Travaux
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="media"
+            >
+                Galerie
             </button>
 
         </nav>
@@ -102,9 +114,17 @@
 
             </div>
 
-            <div class="region-mark top-region">⚜ Québec</div>
+            <div class="region-mark top-region">
+                ⚜ Québec
+            </div>
 
-            <button class="student-link" type="button" onclick="adminDéconnexion()">Déconnexion</button>
+            <button
+                class="student-link"
+                type="button"
+                onclick="adminDéconnexion()"
+            >
+                Déconnexion
+            </button>
 
         </header>
 
@@ -148,17 +168,41 @@
 
 
         <!-- =================================================
-             COURSES
+             STUDENTS
              ================================================= -->
 
+        <section
+            id="students-section"
+            class="admin-section"
+        >
 
-        <section id="students-section" class="admin-section">
             <div class="section-header">
-                <div><h2>Étudiants</h2><p>Créez des comptes étudiants et inscrivez-les à un cours.</p></div>
-                <button id="add-student-button" class="primary-button">+ Ajouter un étudiant</button>
+
+                <div>
+                    <h2>Étudiants</h2>
+                    <p>
+                        Créez des comptes étudiants et
+                        inscrivez-les à un cours.
+                    </p>
+                </div>
+
+                <button
+                    id="add-student-button"
+                    class="primary-button"
+                >
+                    + Ajouter un étudiant
+                </button>
+
             </div>
+
             <div id="students-list"></div>
+
         </section>
+
+
+        <!-- =================================================
+             COURSES
+             ================================================= -->
 
         <section
             id="courses-section"
@@ -232,7 +276,8 @@
                     <h2>Leçons</h2>
 
                     <p>
-                        Créez, modifiez et supprimez les leçons des missions.
+                        Créez, modifiez et supprimez
+                        les leçons des missions.
                     </p>
 
                 </div>
@@ -282,6 +327,44 @@
             </div>
 
             <div id="assignments-list"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             MEDIA GALLERY
+             ================================================= -->
+
+        <section
+            id="media-section"
+            class="admin-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Galerie</h2>
+
+                    <p>
+                        Gérez les présentations PowerPoint,
+                        vidéos, PDF, images et documents
+                        utilisés dans les leçons.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-media-button"
+                    class="primary-button"
+                >
+                    + Ajouter une ressource
+                </button>
+
+            </div>
+
+
+            <div id="media-list"></div>
 
         </section>
 
@@ -341,8 +424,9 @@
 
     <script src="admin/assignments.js"></script>
 
-    <script src="admin/admin.js"></script>
+    <script src="admin/media.js"></script>
 
+    <script src="admin/admin.js"></script>
 
 </body>
 

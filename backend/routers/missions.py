@@ -57,6 +57,27 @@ def create_mission(
     )
 
     db.add(new_mission)
+
+    # Flush so the mission receives its database ID
+    # before Progress records are created.
+    db.flush()
+
+    # Create progress for every existing student.
+    # This ensures that missions added later also appear
+    # in the progression of students who already exist.
+    students = db.query(models.Student).all()
+
+    for student in students:
+        progress = models.Progress(
+            student_id=student.id,
+            mission_id=new_mission.id,
+            score=0,
+            completed=False
+        )
+
+        db.add(progress)
+
+    # Save the mission and all progress records together.
     db.commit()
     db.refresh(new_mission)
 

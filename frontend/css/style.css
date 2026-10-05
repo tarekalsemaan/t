@@ -1,41 +1,68 @@
+/* =========================================================
+   MISSIONLMS — COMPLETE STYLESHEET
+   ========================================================= */
+
 :root {
-    --primary: #1f5fbf;
-    --primary-dark: #174a95;
-    --primary-soft: #eaf2ff;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-soft: #dbeafe;
 
-    --success: #16803c;
-    --success-soft: #eaf8ef;
+    --success: #15803d;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
 
-    --warning: #a16207;
-    --warning-soft: #fff7df;
+    --warning: #92400e;
+    --warning-bg: #fffbeb;
+    --warning-border: #fde68a;
 
-    --danger: #b42318;
-    --danger-soft: #fff0ef;
+    --danger: #b91c1c;
 
     --text: #172033;
+    --text-soft: #475569;
     --muted: #64748b;
-    --border: #dce3ec;
-    --surface: #fff;
-    --background: #f4f7fb;
 
-    --shadow: 0 8px 25px rgba(15, 35, 65, .08);
+    --background: #f5f7fb;
+    --surface: #ffffff;
+
+    --border: #e2e8f0;
+
+    --shadow:
+        0 8px 24px rgba(15, 23, 42, 0.07);
+
     --radius: 14px;
 }
 
 
 /* =========================================================
-   GLOBAL
+   RESET
    ========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+
     background: var(--background);
+
     color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 button,
@@ -45,81 +72,130 @@ select {
     font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 
 /* =========================================================
    HEADER
    ========================================================= */
 
 header {
-    min-height: 72px;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
 
-    padding: 14px 32px;
+    gap: 24px;
 
-    position: sticky;
-    top: 0;
-    z-index: 20;
+    padding: 18px 32px;
+
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+
+    box-shadow:
+        0 2px 10px rgba(15, 23, 42, 0.04);
 }
 
-.brand-block {
-    min-width: 190px;
-}
-
-.brand-block h1 {
+header h1 {
     margin: 0;
-    color: var(--primary);
-    font-size: 24px;
-    letter-spacing: -.4px;
+
+    color: var(--text);
+
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
 }
 
-.brand-subtitle {
-    display: block;
-    margin-top: 2px;
+header p {
+    margin: 2px 0 0;
+
     color: var(--muted);
-    font-size: 12px;
-}
 
-.region-mark {
-    color: #1f2937;
-    font-weight: 700;
-    white-space: nowrap;
-    letter-spacing: .2px;
-}
-
-header .region-mark {
-    margin-left: auto;
-}
-
-.logout-button {
-    border: 1px solid var(--border);
-    background: #fff;
-    color: #334155;
-
-    padding: 9px 15px;
-    border-radius: 8px;
-
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.logout-button:hover {
-    background: #f8fafc;
-    border-color: #b9c4d2;
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   GENERAL CONTAINER
+   GENERAL LAYOUT
    ========================================================= */
 
 .container {
-    width: min(100% - 32px, 980px);
-    margin: 34px auto 60px;
+    width: min(1120px, calc(100% - 40px));
+
+    margin: 30px auto 60px;
+}
+
+section {
+    margin-bottom: 24px;
+}
+
+section > h2 {
+    margin: 0 0 16px;
+
+    color: var(--text);
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.loading {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+    border: 0;
+    border-radius: 9px;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.logout-button {
+    padding: 9px 15px;
+
+    border: 1px solid var(--border);
+
+    background: #ffffff;
+
+    color: var(--text-soft);
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.logout-button:hover {
+    background: #f8fafc;
+}
+
+.back-button {
+    margin-bottom: 20px;
+    padding: 9px 14px;
+
+    border: 1px solid var(--border);
+
+    background: #ffffff;
+
+    color: var(--text-soft);
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.back-button:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
 }
 
 
@@ -128,472 +204,640 @@ header .region-mark {
    ========================================================= */
 
 .student-card {
-    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+    padding: 18px 22px;
+
     border: 1px solid var(--border);
     border-radius: var(--radius);
 
-    padding: 25px 28px;
-    margin-bottom: 28px;
+    background: var(--surface);
 
     box-shadow: var(--shadow);
 }
 
 .student-card h2 {
-    margin: 0 0 6px;
-    font-size: 25px;
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 800;
 }
 
 .student-card p {
-    margin: 0;
-    color: var(--muted);
-}
+    margin: 3px 0 0;
 
-#missions-screen > h2 {
-    margin: 0 0 18px;
-    font-size: 25px;
+    color: var(--muted);
+
+    font-size: 14px;
 }
 
 
 /* =========================================================
-   MISSIONS
+   MISSIONS LIST
    ========================================================= */
 
-.mission {
-    background: #fff;
+#missions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(270px, 1fr));
+
+    gap: 18px;
+}
+
+.mission-card {
+    position: relative;
+
+    padding: 22px;
+
     border: 1px solid var(--border);
-    border-left: 5px solid #cbd5e1;
     border-radius: var(--radius);
 
-    padding: 23px 24px;
-    margin-bottom: 15px;
+    background: var(--surface);
 
-    box-shadow: 0 3px 12px rgba(15, 35, 65, .05);
+    box-shadow: var(--shadow);
 
-    transition: .15s;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
 }
 
-.mission.unlocked {
-    border-left-color: var(--success);
+.mission-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #cbd5e1;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.09);
 }
 
-.mission.unlocked:hover {
-    transform: translateY(-1px);
+.mission-card h3 {
+    margin: 0 0 8px;
+
+    color: var(--text);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.mission-card p {
+    margin: 7px 0;
+
+    color: var(--text-soft);
+}
+
+.mission-card button {
+    margin-top: 12px;
+    padding: 9px 14px;
+
+    background: var(--primary);
+
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+.mission-card button:hover {
+    background: var(--primary-dark);
+}
+
+
+/* =========================================================
+   MISSION HEADER
+   ========================================================= */
+
+.mission-header {
+    padding: 22px 24px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+
     box-shadow: var(--shadow);
 }
 
-.mission.locked {
-    opacity: .65;
-    background: #f9fafb;
+.mission-header h2 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+    font-weight: 850;
+    letter-spacing: -0.3px;
 }
 
-.mission h3 {
-    margin: 0 0 15px;
-    font-size: 19px;
-}
-
-.mission p {
-    margin: 8px 0;
-    color: #475569;
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.status {
-    display: inline-flex;
-    align-items: center;
-
-    margin: 13px 0 3px;
-    padding: 6px 10px;
-
-    border-radius: 999px;
-
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.status.unlocked {
-    background: var(--success-soft);
+#mission-status {
     color: var(--success);
-}
 
-.status.locked {
-    background: #eef1f5;
-    color: #64748b;
-}
-
-.status.completed {
-    background: var(--primary-soft);
-    color: var(--primary);
+    font-size: 14px;
+    font-weight: 750;
 }
 
 
 /* =========================================================
-   BUTTONS
+   CONTENT SECTIONS
    ========================================================= */
 
-.mission-button,
-.back-button,
-.submit-button {
-    border: 0;
-    border-radius: 8px;
-
-    cursor: pointer;
-    font-weight: 700;
-
-    transition: .2s;
+.content-section {
+    margin-top: 24px;
 }
 
-.mission-button {
-    padding: 10px 17px;
-    margin-top: 12px;
-}
+#lessons,
+#assignments {
+    display: flex;
+    flex-direction: column;
 
-.open-button {
-    background: var(--primary);
-    color: #fff;
-}
-
-.open-button:hover {
-    background: var(--primary-dark);
-}
-
-.locked-button {
-    background: #e2e8f0;
-    color: #64748b;
-    cursor: not-allowed;
-}
-
-.back-button {
-    background: #334155;
-    color: #fff;
-
-    padding: 10px 17px;
-    margin-bottom: 22px;
-}
-
-.back-button:hover {
-    background: #1e293b;
-}
-
-.submit-button {
-    background: var(--success);
-    color: #fff;
-
-    padding: 12px 20px;
-    margin-top: 12px;
-}
-
-.submit-button:hover {
-    background: #116530;
-}
-
-.submit-button:disabled {
-    background: #94a3b8;
-    cursor: not-allowed;
+    gap: 20px;
 }
 
 
 /* =========================================================
-   MISSION DETAILS
+   LESSON CARD
    ========================================================= */
 
-#mission-title {
-    margin: 0 0 8px;
-    font-size: 28px;
-}
-
-#mission-screen > h3 {
-    margin: 30px 0 14px;
-    font-size: 20px;
-}
-
-
-/* =========================================================
-   LESSONS / ASSIGNMENTS
-   ========================================================= */
-
-.lesson,
-.assignment {
-    background: #fff;
+.lesson {
+    overflow: hidden;
 
     border: 1px solid var(--border);
     border-radius: var(--radius);
 
-    padding: 25px;
-    margin-bottom: 18px;
+    background: var(--surface);
 
-    box-shadow: 0 3px 12px rgba(15, 35, 65, .05);
+    box-shadow: var(--shadow);
 }
 
-.lesson {
-    border-left: 4px solid var(--primary);
-}
+.lesson > h3 {
+    margin: 0;
+    padding: 18px 24px;
 
-.assignment {
-    border-left: 4px solid #7c3aed;
-}
+    border-bottom: 1px solid var(--border);
 
-.lesson h3,
-.assignment h3 {
-    margin: 0 0 14px;
-    font-size: 19px;
-}
+    background: #f8fafc;
 
-.lesson-content,
-.assignment-instructions {
-    line-height: 1.75;
-    color: #334155;
-    white-space: pre-wrap;
-}
+    color: var(--text);
 
-
-/* =========================================================
-   ASSIGNMENT ANSWER
-   ========================================================= */
-
-.answer-label {
-    display: block;
-
-    margin-top: 22px;
-    margin-bottom: 8px;
-
-    font-weight: 700;
-    color: #334155;
-}
-
-.answer-box {
-    width: 100%;
-    min-height: 220px;
-
-    padding: 14px;
-
-    border: 1px solid #cbd5e1;
-    border-radius: 9px;
-
-    background: #fbfcfe;
-    color: #172033;
-
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 14px;
-    line-height: 1.55;
-
-    resize: vertical;
-}
-
-.answer-box:focus {
-    outline: none;
-    border-color: var(--primary);
-
-    box-shadow:
-        0 0 0 3px rgba(31, 95, 191, .12);
-}
-
-
-/* =========================================================
-   RESULTS
-   ========================================================= */
-
-.submission-result {
-    margin-top: 18px;
-    padding: 16px;
-    border-radius: 10px;
-}
-
-.success {
-    background: var(--success-soft);
-    color: #166534;
-    border: 1px solid #b7e4c7;
-}
-
-.warning {
-    background: var(--warning-soft);
-    color: #854d0e;
-    border: 1px solid #f1d58a;
-}
-
-.error {
-    background: var(--danger-soft);
-    color: #991b1b;
-
-    padding: 15px;
-    border-radius: 9px;
-
-    border: 1px solid #f4c7c3;
-}
-
-.loading,
-.no-data {
-    color: var(--muted);
-}
-
-.no-data {
-    padding: 12px 0;
-}
-
-.score {
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 800;
-    margin-top: 10px;
+}
+
+.lesson-content {
+    padding: 26px 30px;
 }
 
 
 /* =========================================================
-   LOGIN PAGE
+   MARKDOWN — GENERAL
    ========================================================= */
 
-.login-page {
-    min-height: 100vh;
+.markdown-content {
+    white-space: normal;
 
-    background: linear-gradient(
-        135deg,
-        #eef4ff 0%,
-        #f7f9fc 55%,
-        #eef6f1 100%
-    );
+    color: var(--text-soft);
+
+    line-height: 1.65;
 }
 
-.login-container {
-    min-height: 100vh;
+.markdown-content p {
+    margin: 11px 0 15px;
 
+    color: var(--text-soft);
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MARKDOWN — MISSION TITLE
+   ========================================================= */
+
+.markdown-content h2 {
+    margin: 0 0 30px;
+    padding: 17px 20px;
+
+    border: 1px solid var(--primary-soft);
+    border-left: 5px solid var(--primary);
+    border-radius: 10px;
+
+    background: #f8fbff;
+
+    color: var(--text);
+
+    font-size: 24px;
+    font-weight: 850;
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   MARKDOWN — STEPS
+   ========================================================= */
+
+.markdown-content h3 {
+    margin: 30px 0 16px;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--text);
+
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.markdown-content h4 {
+    margin: 24px 0 12px;
+
+    color: var(--text);
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   MARKDOWN — ACTION ITEMS
+   ========================================================= */
+
+.markdown-content .markdown-item {
     display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 5px 0;
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    color: var(--text-soft);
+
+    line-height: 1.55;
+}
+
+.markdown-content .markdown-item:hover {
+    background: #f8fafc;
+}
+
+.markdown-content .markdown-bullet {
+    flex: 0 0 18px;
+
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    padding: 24px;
-}
+    padding-top: 1px;
 
-.login-card {
-    width: 100%;
-    max-width: 440px;
+    color: var(--primary);
 
-    overflow: hidden;
-
-    background: #fff;
-
-    border: 1px solid var(--border);
-    border-radius: 18px;
-
-    box-shadow:
-        0 18px 45px rgba(15, 35, 65, .12);
-}
-
-.login-header {
-    padding: 31px 30px 27px;
-
-    background: var(--primary);
-    color: #fff;
-
-    text-align: center;
-}
-
-.login-header h1 {
-    margin: 0;
-    font-size: 32px;
-}
-
-.login-header p {
-    margin: 8px 0 0;
     font-size: 14px;
-    opacity: .92;
-}
-
-.login-content {
-    padding: 31px;
-}
-
-.login-content h2 {
-    margin: 0;
-    font-size: 25px;
-}
-
-.login-subtitle {
-    color: var(--muted);
-
-    margin: 8px 0 25px;
-
-    line-height: 1.5;
+    font-weight: 900;
 }
 
 
 /* =========================================================
-   LOGIN FORM
+   MARKDOWN — ◆ DETAIL ITEMS
    ========================================================= */
 
-.form-group {
-    margin-bottom: 18px;
+.markdown-content .markdown-diamond {
+    margin: 3px 0;
+    padding: 5px 9px;
 }
 
-.form-group label {
-    display: block;
-
-    margin-bottom: 7px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    color: #334155;
+.markdown-content .markdown-diamond .markdown-bullet {
+    font-size: 9px;
 }
 
-.form-group input {
-    width: 100%;
 
-    padding: 12px 13px;
+/* =========================================================
+   MARKDOWN — SUCCESS
+   ========================================================= */
 
-    border: 1px solid #cbd5e1;
+.markdown-content .markdown-check {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 12px 0 16px;
+    padding: 10px 13px;
+
+    border: 1px solid var(--success-border);
     border-radius: 8px;
 
-    background: #fff;
+    background: var(--success-bg);
+
+    color: var(--success);
+
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.markdown-content .markdown-check-icon {
+    flex: 0 0 20px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   MARKDOWN — WARNING
+   ========================================================= */
+
+.markdown-content .markdown-warning {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 14px 0 17px;
+    padding: 11px 13px;
+
+    border: 1px solid var(--warning-border);
+    border-radius: 8px;
+
+    background: var(--warning-bg);
+
+    color: var(--warning);
+
+    line-height: 1.55;
+}
+
+.markdown-content .markdown-warning-icon {
+    flex: 0 0 20px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   MARKDOWN — CHECKLIST
+   ========================================================= */
+
+.markdown-content .markdown-checklist {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 4px 0;
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    color: var(--text-soft);
+}
+
+.markdown-content .markdown-checkbox {
+    flex: 0 0 20px;
+
+    color: var(--primary);
+
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   MARKDOWN — LINKS
+   ========================================================= */
+
+.markdown-content a {
+    color: var(--primary);
+
+    font-weight: 650;
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+}
+
+.markdown-content a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MARKDOWN — INLINE CODE
+   ========================================================= */
+
+.markdown-content .inline-code {
+    display: inline-block;
+
+    padding: 2px 7px;
+
+    border: 1px solid #d8dee8;
+    border-radius: 5px;
+
+    background: #f1f5f9;
+
+    color: #1e293b;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 0.92em;
+}
+
+
+/* =========================================================
+   MARKDOWN — CODE / PROMPT BOXES
+   ========================================================= */
+
+.markdown-content .code-block {
+    margin: 14px 0 20px;
+
+    overflow: hidden;
+
+    border: 1px solid #263244;
+    border-radius: 9px;
+
+    background: #111827;
+
+    box-shadow:
+        0 5px 14px rgba(15, 23, 42, 0.10);
+}
+
+.markdown-content .code-language {
+    padding: 6px 15px;
+
+    border-bottom: 1px solid #334155;
+
+    background: #1e293b;
+
+    color: #94a3b8;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.markdown-content pre {
+    margin: 0;
+    padding: 16px 18px;
+
+    overflow-x: auto;
+
+    background: transparent;
+
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+.markdown-content pre code {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #f8fafc;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MARKDOWN — SEPARATOR
+   ========================================================= */
+
+.markdown-content hr {
+    height: 1px;
+
+    margin: 26px 0;
+
+    border: 0;
+
+    background: var(--border);
+}
+
+
+/* =========================================================
+   MARKDOWN — EMPHASIS
+   ========================================================= */
+
+.markdown-content strong {
+    color: var(--text);
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   ASSIGNMENTS
+   ========================================================= */
+
+.assignment {
+    padding: 22px 24px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+
+    box-shadow: var(--shadow);
+}
+
+.assignment h3 {
+    margin: 0 0 12px;
+
+    color: var(--text);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.assignment-instructions {
+    margin: 12px 0;
+
+    white-space: pre-wrap;
+
+    color: var(--text-soft);
+
+    line-height: 1.7;
+}
+
+.assignment textarea {
+    width: 100%;
+    min-height: 150px;
+
+    margin-top: 14px;
+    padding: 13px 14px;
+
+    resize: vertical;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: var(--text);
 
     outline: none;
 }
 
-.form-group input:focus {
+.assignment textarea:focus {
     border-color: var(--primary);
 
     box-shadow:
-        0 0 0 3px rgba(31, 95, 191, .12);
+        0 0 0 3px rgba(37, 99, 235, 0.10);
 }
 
-.login-button {
-    width: 100%;
-
-    padding: 13px;
-
-    border: 0;
-    border-radius: 8px;
+.assignment button {
+    margin-top: 12px;
+    padding: 10px 16px;
 
     background: var(--primary);
-    color: #fff;
 
-    font-weight: 700;
+    color: #ffffff;
 
-    cursor: pointer;
+    font-weight: 750;
 }
 
-.login-button:hover {
+.assignment button:hover {
     background: var(--primary-dark);
 }
 
-.login-error:empty {
-    display: none;
+
+/* =========================================================
+   COMMON STATUS / FEEDBACK CLASSES
+   ========================================================= */
+
+.success,
+.completed {
+    color: var(--success);
 }
 
-.login-error {
-    margin: 16px 0 0;
+.error {
+    color: var(--danger);
+}
 
-    padding: 10px 12px;
+.feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
 
     border-radius: 8px;
 
-    background: var(--danger-soft);
-    color: var(--danger);
+    background: #f8fafc;
 
-    text-align: center;
-
-    font-size: 14px;
+    color: var(--text-soft);
 }
 
 
@@ -604,21 +848,633 @@ header .region-mark {
 @media (max-width: 700px) {
 
     header {
-        padding: 13px 17px;
+        padding: 15px 18px;
     }
 
-    header .region-mark {
-        display: none;
+    header h1 {
+        font-size: 20px;
     }
 
     .container {
-        width: min(100% - 22px, 980px);
-        margin-top: 22px;
+        width: min(100% - 24px, 1120px);
+
+        margin-top: 20px;
     }
 
-    .student-card,
-    .lesson,
-    .assignment {
+    .student-card {
+        padding: 16px 18px;
+    }
+
+    .mission-header {
+        padding: 18px;
+    }
+
+    .mission-header h2 {
+        font-size: 21px;
+    }
+
+    .lesson > h3 {
+        padding: 15px 17px;
+    }
+
+    .lesson-content {
+        padding: 20px 17px;
+    }
+
+    .markdown-content h2 {
+        margin-bottom: 24px;
+        padding: 14px 15px;
+
+        font-size: 21px;
+    }
+
+    .markdown-content h3 {
+        margin-top: 26px;
+
+        font-size: 18px;
+    }
+
+    .markdown-content .markdown-item,
+    .markdown-content .markdown-diamond,
+    .markdown-content .markdown-check,
+    .markdown-content .markdown-warning,
+    .markdown-content .markdown-checklist {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .markdown-content pre {
+        padding: 14px;
+    }
+
+    .markdown-content pre code {
+        font-size: 13px;
+    }
+
+    #missions {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   MISSION CARDS — ACTUAL APP.JS CLASSES
+   ========================================================= */
+
+#missions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Mission card */
+.mission {
+    padding: 24px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.07);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.mission:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.10);
+}
+
+/* Unlocked mission */
+.mission.unlocked {
+    border-left: 4px solid #2563eb;
+}
+
+/* Locked mission */
+.mission.locked {
+    opacity: 0.72;
+    border-left: 4px solid #94a3b8;
+}
+
+/* Mission title */
+.mission h3 {
+    margin: 0 0 16px;
+
+    color: #172033;
+
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+/* Mission information */
+.mission > p {
+    margin: 7px 0;
+
+    color: #475569;
+
+    font-size: 14px;
+}
+
+/* Status */
+.mission .status {
+    display: inline-flex;
+    align-items: center;
+
+    margin: 14px 0 4px;
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.mission .status.unlocked {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.mission .status.completed {
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.mission .status.locked {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* Mission buttons */
+.mission-button {
+    display: block;
+
+    width: fit-content;
+
+    margin-top: 16px;
+    padding: 10px 16px;
+
+    border: 0;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+/* Start / review */
+.open-button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.open-button:hover {
+    background: #1d4ed8;
+}
+
+.open-button:active {
+    transform: translateY(1px);
+}
+
+/* Locked button */
+.locked-button {
+    background: #e2e8f0;
+    color: #64748b;
+
+    cursor: not-allowed;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    #missions {
+        grid-template-columns: 1fr;
+    }
+
+    .mission {
         padding: 20px;
+    }
+}
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 35%),
+        linear-gradient(135deg, #08111f 0%, #0f1c33 55%, #13264a 100%);
+    color: #0f172a;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.login-header {
+    padding: 34px 36px 30px;
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    color: #ffffff;
+}
+
+.login-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.login-header p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.login-content {
+    padding: 34px 36px 38px;
+}
+
+.login-content h2 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    color: #0f172a;
+}
+
+.login-subtitle {
+    margin: 0 0 28px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.login-content .form-group {
+    margin-bottom: 20px;
+}
+
+.login-content .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.login-content .form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+.login-content .form-group input:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.login-content .form-group input::placeholder {
+    color: #94a3b8;
+}
+
+.login-button {
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 4px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-error {
+    min-height: 20px;
+    margin: 18px 0 0;
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+@media (max-width: 520px) {
+    .login-container {
+        padding: 16px;
+    }
+
+    .login-header,
+    .login-content {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .login-header h1 {
+        font-size: 28px;
+    }
+}
+/* =========================================================
+   MISSION RESOURCES
+   ========================================================= */
+
+.mission-resources {
+    margin-top: 32px;
+    padding-top: 26px;
+
+    border-top: 1px solid var(--border);
+}
+
+.mission-resources-header {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.mission-resources-header > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+
+    background: var(--primary-soft);
+
+    font-size: 23px;
+}
+
+.mission-resources-kicker {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.2px;
+}
+
+.mission-resources-header h3 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 19px;
+    font-weight: 850;
+}
+
+
+/* RESOURCE CARD */
+
+.mission-resources-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.mission-resource-card {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    padding: 20px;
+
+    border: 1px solid #dbe5f1;
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fbff 0%,
+            #ffffff 65%
+        );
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.mission-resource-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 10px 26px rgba(15, 23, 42, 0.08);
+}
+
+
+/* RESOURCE ICON */
+
+.mission-resource-icon {
+    flex: 0 0 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 13px;
+
+    background: #eff6ff;
+
+    font-size: 25px;
+}
+
+
+/* RESOURCE CONTENT */
+
+.mission-resource-body {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.mission-resource-type {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1px;
+}
+
+.mission-resource-body h4 {
+    margin: 0 0 6px;
+
+    color: var(--text);
+
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.mission-resource-body p {
+    margin: 0 0 14px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+
+/* RESOURCE BUTTON */
+
+.mission-resource-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 15px;
+
+    border-radius: 8px;
+
+    background: var(--primary);
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.mission-resource-button:hover {
+    background: var(--primary-dark);
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.20);
+
+    text-decoration: none;
+}
+
+.mission-resource-button:active {
+    transform: translateY(1px);
+}
+
+
+/* VIDEO */
+
+.mission-resource-video {
+    display: block;
+
+    width: 100%;
+    max-width: 760px;
+
+    margin-top: 14px;
+
+    border-radius: 10px;
+
+    background: #0f172a;
+}
+
+
+/* IMAGE */
+
+.mission-resource-image {
+    display: block;
+
+    width: 100%;
+    max-width: 760px;
+
+    margin-top: 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .mission-resource-card {
+        flex-direction: column;
+
+        gap: 13px;
+
+        padding: 17px;
+    }
+
+    .mission-resource-icon {
+        width: 46px;
+        height: 46px;
+
+        flex-basis: 46px;
+
+        font-size: 22px;
+    }
+
+    .mission-resource-button {
+        width: 100%;
     }
 }

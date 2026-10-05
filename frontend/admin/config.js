@@ -13,7 +13,10 @@ const API_URL =
 // =========================================================
 
 function adminToken() {
-    return localStorage.getItem("missionlms_token");
+
+    return localStorage.getItem(
+        "missionlms_token"
+    );
 }
 
 
@@ -22,11 +25,18 @@ function adminToken() {
 // =========================================================
 
 function adminUser() {
+
     try {
+
         return JSON.parse(
-            localStorage.getItem("missionlms_user")
+            localStorage.getItem(
+                "missionlms_user"
+            )
         );
-    } catch {
+
+    }
+    catch {
+
         return null;
     }
 }
@@ -37,10 +47,18 @@ function adminUser() {
 // =========================================================
 
 function adminDéconnexion() {
-    localStorage.removeItem("missionlms_token");
-    localStorage.removeItem("missionlms_user");
 
-    window.location.href = "login.html";
+    localStorage.removeItem(
+        "missionlms_token"
+    );
+
+    localStorage.removeItem(
+        "missionlms_user"
+    );
+
+
+    window.location.href =
+        "login.html";
 }
 
 
@@ -52,38 +70,59 @@ if (
     !adminToken() ||
     adminUser()?.role !== "ADMIN"
 ) {
+
     adminDéconnexion();
 }
 
 
 // =========================================================
 // ADMIN API REQUEST
+// Supports JSON requests and file uploads
 // =========================================================
 
 async function adminFetch(
     url,
     options = {}
 ) {
+
+    const isFormData =
+        options.body instanceof FormData;
+
+
     const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${adminToken() || ""}`,
+
+        "Authorization":
+            `Bearer ${adminToken() || ""}`,
+
+        ...(isFormData
+            ? {}
+            : {
+                "Content-Type":
+                    "application/json"
+            }),
+
         ...(options.headers || {})
     };
 
-    const response = await fetch(
-        url,
-        {
-            ...options,
-            headers
-        }
-    );
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers
+            }
+        );
+
 
     if (
         response.status === 401 ||
         response.status === 403
     ) {
+
         adminDéconnexion();
     }
+
 
     return response;
 }

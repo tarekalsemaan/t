@@ -133,15 +133,6 @@ async function loadProgress() {
                     }
                 </button>
             `;
-        } else {
-            button = `
-                <button
-                    class="mission-button locked-button"
-                    disabled
-                >
-                    🔒 Verrouillée
-                </button>
-            `;
         }
 
         card.innerHTML = `
@@ -221,6 +212,217 @@ async function openMission(
 
 
 // =========================================================
+// MEDIA RENDERING
+// =========================================================
+
+function renderLessonMedia(mediaItems) {
+    if (
+        !Array.isArray(mediaItems) ||
+        mediaItems.length === 0
+    ) {
+        return "";
+    }
+
+    const items = mediaItems.map(media => {
+        const title =
+            escapeHtml(
+                media.title ||
+                "Ressource de mission"
+            );
+
+        const url =
+            escapeHtml(media.url || "");
+
+        const mimeType =
+            escapeHtml(media.mime_type || "");
+
+        if (media.media_type === "video") {
+            return `
+                <div class="mission-resource-card">
+                    <div class="mission-resource-icon">
+                        🎥
+                    </div>
+
+                    <div class="mission-resource-body">
+                        <span class="mission-resource-type">
+                            VIDÉO DE MISSION
+                        </span>
+
+                        <h4>${title}</h4>
+
+                        <p>
+                            Regardez cette ressource avant de poursuivre
+                            votre mission.
+                        </p>
+
+                        <video
+                            class="mission-resource-video"
+                            controls
+                            preload="metadata"
+                        >
+                            <source
+                                src="${url}"
+                                type="${mimeType}"
+                            >
+                            Votre navigateur ne peut pas lire cette vidéo.
+                        </video>
+                    </div>
+                </div>
+            `;
+        }
+
+        if (media.media_type === "image") {
+            return `
+                <div class="mission-resource-card">
+                    <div class="mission-resource-icon">
+                        🖼️
+                    </div>
+
+                    <div class="mission-resource-body">
+                        <span class="mission-resource-type">
+                            IMAGE DE MISSION
+                        </span>
+
+                        <h4>${title}</h4>
+
+                        <p>
+                            Consultez cette ressource pour avancer
+                            dans votre mission.
+                        </p>
+
+                        <a
+                            href="${url}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                class="mission-resource-image"
+                                src="${url}"
+                                alt="${title}"
+                            >
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        if (media.media_type === "powerpoint") {
+            return `
+                <div class="mission-resource-card">
+                    <div class="mission-resource-icon">
+                        📊
+                    </div>
+
+                    <div class="mission-resource-body">
+                        <span class="mission-resource-type">
+                            SUPPORT DE MISSION
+                        </span>
+
+                        <h4>${title}</h4>
+
+                        <p>
+                            Consultez la présentation de la mission
+                            avant de poursuivre le défi.
+                        </p>
+
+                        <a
+                            class="mission-resource-button"
+                            href="${url}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            ▶ Ouvrir le PowerPoint
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        if (media.media_type === "pdf") {
+            return `
+                <div class="mission-resource-card">
+                    <div class="mission-resource-icon">
+                        📄
+                    </div>
+
+                    <div class="mission-resource-body">
+                        <span class="mission-resource-type">
+                            DOCUMENT DE MISSION
+                        </span>
+
+                        <h4>${title}</h4>
+
+                        <p>
+                            Consultez ce document pour poursuivre
+                            votre mission.
+                        </p>
+
+                        <a
+                            class="mission-resource-button"
+                            href="${url}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            ▶ Ouvrir le PDF
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="mission-resource-card">
+                <div class="mission-resource-icon">
+                    📎
+                </div>
+
+                <div class="mission-resource-body">
+                    <span class="mission-resource-type">
+                        RESSOURCE DE MISSION
+                    </span>
+
+                    <h4>${title}</h4>
+
+                    <p>
+                        Une ressource supplémentaire est disponible
+                        pour cette mission.
+                    </p>
+
+                    <a
+                        class="mission-resource-button"
+                        href="${url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        ▶ Ouvrir la ressource
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    return `
+        <div class="mission-resources">
+            <div class="mission-resources-header">
+                <span>🎒</span>
+
+                <div>
+                    <span class="mission-resources-kicker">
+                        ÉQUIPEMENT
+                    </span>
+
+                    <h3>Ressources de la mission</h3>
+                </div>
+            </div>
+
+            <div class="mission-resources-list">
+                ${items}
+            </div>
+        </div>
+    `;
+}
+
+// =========================================================
 // LOAD STUDENT MISSION LESSONS
 // =========================================================
 
@@ -296,11 +498,11 @@ async function loadLessons(missionId) {
                     ${escapeHtml(lesson.title)}
                 </h3>
 
-                <div class="lesson-content">
-                    ${escapeHtml(
-                        cleanContent(lesson.content)
-                    )}
+                <div class="lesson-content markdown-content">
+                    ${renderMarkdown(lesson.content)}
                 </div>
+
+                ${renderLessonMedia(lesson.media)}
             `;
 
             container.appendChild(
@@ -516,7 +718,6 @@ async function loadLatestSubmission(
             );
         }
 
-        // Student has never submitted this assignment.
         if (!data.submission) {
             return;
         }
@@ -524,11 +725,9 @@ async function loadLatestSubmission(
         const submission =
             data.submission;
 
-        // Restore the exact submitted answer.
         answerBox.value =
             submission.content || "";
 
-        // Submission exists but has not been evaluated.
         if (submission.score === null) {
             resultBox.innerHTML = `
                 <div class="submission-result warning">
@@ -546,7 +745,6 @@ async function loadLatestSubmission(
             return;
         }
 
-        // Evaluated submission.
         const passed =
             submission.score >= 80;
 
@@ -596,8 +794,6 @@ async function loadLatestSubmission(
             `;
         }
 
-        // A failed attempt can be retried.
-        // A passed assignment stays read-only.
         if (passed) {
             answerBox.disabled = true;
             submitButton.disabled = true;
@@ -648,10 +844,6 @@ async function submitAssignment(
     const content =
         answerBox.value.trim();
 
-    // =====================================================
-    // VALIDATE ANSWER
-    // =====================================================
-
     if (!content) {
         resultBox.innerHTML = `
             <div class="error">
@@ -674,10 +866,6 @@ async function submitAssignment(
     `;
 
     try {
-        // =================================================
-        // STEP 1 — SAVE SUBMISSION
-        // =================================================
-
         const response =
             await authenticatedFetch(
                 `${API_URL}/submissions`,
@@ -717,10 +905,6 @@ async function submitAssignment(
         const submissionId =
             data.id;
 
-        // =================================================
-        // STEP 2 — BACKEND EVALUATION
-        // =================================================
-
         resultBox.innerHTML = `
             <p class="loading">
                 Évaluation de votre réponse…
@@ -752,10 +936,6 @@ async function submitAssignment(
                 evaluationData.error
             );
         }
-
-        // =================================================
-        // STEP 3 — DISPLAY EVALUATION
-        // =================================================
 
         if (evaluationData.passed) {
             resultBox.innerHTML = `
@@ -809,8 +989,6 @@ async function submitAssignment(
             `;
         }
 
-        // A failed attempt can be retried.
-        // A passed assignment stays read-only.
         if (evaluationData.passed) {
             answerBox.disabled = true;
             submitButton.disabled = true;
@@ -821,7 +999,6 @@ async function submitAssignment(
             submitButton.textContent = "Réessayer";
         }
 
-        // Refresh mission scores and unlocking.
         await loadProgress();
 
     } catch (error) {
@@ -870,7 +1047,8 @@ function cleanContent(value) {
         .replace(/&#x20;/gi, " ")
         .replace(/&amp;nbsp;/gi, " ")
         .replace(/&nbsp;/gi, " ")
-        .replace(/\s+/g, " ")
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n")
         .trim();
 }
 
@@ -881,26 +1059,11 @@ function cleanContent(value) {
 
 function escapeHtml(value) {
     return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 

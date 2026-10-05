@@ -15,6 +15,7 @@ from backend.routers import (
     lessons,
     assignments,
     submissions,
+    media,
 )
 
 
@@ -68,6 +69,7 @@ app.include_router(students.router)
 app.include_router(lessons.router)
 app.include_router(assignments.router)
 app.include_router(submissions.router)
+app.include_router(media.router)
 app.include_router(auth_router.router)
 
 
@@ -98,6 +100,26 @@ if frontend.exists():
         ),
         name="frontend",
     )
+
+
+# =========================================================
+# MEDIA STORAGE
+# =========================================================
+
+media_directory = Path("/data/media")
+
+media_directory.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+app.mount(
+    "/media",
+    StaticFiles(
+        directory=str(media_directory)
+    ),
+    name="media",
+)
 
 
 # =========================================================

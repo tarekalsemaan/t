@@ -1,4 +1,12 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Text,
+    Boolean,
+    ForeignKey
+)
+
 from sqlalchemy.orm import relationship
 
 from backend.database import Base
@@ -97,6 +105,126 @@ class Lesson(Base):
 
     mission = relationship("Mission")
 
+    media_links = relationship(
+        "LessonMedia",
+        back_populates="lesson",
+        cascade="all, delete-orphan"
+    )
+
+
+# =========================================================
+# MEDIA / GALLERY
+# =========================================================
+
+class Media(Base):
+    __tablename__ = "media"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    # Display name shown to administrators and students
+    title = Column(
+        String,
+        nullable=False
+    )
+
+    # Original uploaded filename
+    filename = Column(
+        String,
+        nullable=False
+    )
+
+    # File stored on the server
+    file_path = Column(
+        String,
+        nullable=False
+    )
+
+    # Examples:
+    # powerpoint
+    # video
+    # pdf
+    # image
+    # document
+    media_type = Column(
+        String,
+        nullable=False
+    )
+
+    # MIME type, for example:
+    # application/vnd.openxmlformats-officedocument.presentationml.presentation
+    # video/mp4
+    # application/pdf
+    mime_type = Column(
+        String,
+        nullable=False
+    )
+
+    # Optional description
+    description = Column(
+        Text,
+        nullable=True
+    )
+
+    # Active media can be displayed in the LMS
+    active = Column(
+        Boolean,
+        default=True,
+        nullable=False
+    )
+
+    lesson_links = relationship(
+        "LessonMedia",
+        back_populates="media",
+        cascade="all, delete-orphan"
+    )
+
+
+# =========================================================
+# LESSON ↔ MEDIA
+# =========================================================
+
+class LessonMedia(Base):
+    __tablename__ = "lesson_media"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    lesson_id = Column(
+        Integer,
+        ForeignKey("lessons.id"),
+        nullable=False
+    )
+
+    media_id = Column(
+        Integer,
+        ForeignKey("media.id"),
+        nullable=False
+    )
+
+    # Controls the order in which media appears
+    display_order = Column(
+        Integer,
+        default=0,
+        nullable=False
+    )
+
+    lesson = relationship(
+        "Lesson",
+        back_populates="media_links"
+    )
+
+    media = relationship(
+        "Media",
+        back_populates="lesson_links"
+    )
+
 
 # =========================================================
 # ASSIGNMENT
@@ -157,13 +285,22 @@ class Submission(Base):
     )
 
     # Student's submitted answer/code
-    content = Column(Text, nullable=False)
+    content = Column(
+        Text,
+        nullable=False
+    )
 
     # None means it has not been evaluated yet
-    score = Column(Integer, nullable=True)
+    score = Column(
+        Integer,
+        nullable=True
+    )
 
     # Optional teacher/automatic evaluation feedback
-    feedback = Column(Text, nullable=True)
+    feedback = Column(
+        Text,
+        nullable=True
+    )
 
     student = relationship("Student")
     assignment = relationship("Assignment")
@@ -204,5 +341,3 @@ class User(Base):
         ForeignKey("students.id"),
         nullable=True
     )
-
-    student = relationship("Student")
